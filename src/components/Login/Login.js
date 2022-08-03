@@ -6,9 +6,11 @@ import Button from "../UI/Button/Button";
 
 const emailReducer = (state, action) => {
   if (action.type === "USER_INPUT") {
+    console.log(`user input : ${action.val}`);
     return { value: action.val, isValid: action.val.includes("@") };
   }
   if (action.type === "INPUT_BLUR") {
+    console.log(`input blur : ${state.value}`);
     return { value: state.value, isValid: state.value.includes("@") };
   }
   return { value: "", isValid: false };
@@ -16,9 +18,11 @@ const emailReducer = (state, action) => {
 
 const passwordReducer = (state, action) => {
   if (action.type === "USER_INPUT") {
+    console.log(`user input pass : ${action.val}`);
     return { value: action.val, isValid: action.val.trim().length > 6 };
   }
   if (action.type === "INPUT_BLUR") {
+    console.log(`input blur pass : ${state.value}`);
     return { value: state.value, isValid: state.value.trim().length > 6 };
   }
   return { value: "", isValid: false };
