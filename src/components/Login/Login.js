@@ -1,16 +1,15 @@
 import React, { useState, useEffect, useReducer } from "react";
-
 import Card from "../UI/Card/Card";
 import classes from "./Login.module.css";
 import Button from "../UI/Button/Button";
 
 const emailReducer = (state, action) => {
   if (action.type === "USER_INPUT") {
-    console.log(`user input : ${action.val}`);
+    console.log(`user is input email : ${action.val}`);
     return { value: action.val, isValid: action.val.includes("@") };
   }
   if (action.type === "INPUT_BLUR") {
-    console.log(`input blur : ${state.value}`);
+    console.log(`user finish input email - blur : ${state.value}`);
     return { value: state.value, isValid: state.value.includes("@") };
   }
   return { value: "", isValid: false };
@@ -18,11 +17,11 @@ const emailReducer = (state, action) => {
 
 const passwordReducer = (state, action) => {
   if (action.type === "USER_INPUT") {
-    console.log(`user input pass : ${action.val}`);
+    console.log(`user is input pass : ${action.val}`);
     return { value: action.val, isValid: action.val.trim().length > 6 };
   }
   if (action.type === "INPUT_BLUR") {
-    console.log(`input blur pass : ${state.value}`);
+    console.log(`user finish input pass - blur : ${state.value}`);
     return { value: state.value, isValid: state.value.trim().length > 6 };
   }
   return { value: "", isValid: false };
@@ -35,6 +34,7 @@ const Login = (props) => {
   // const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
 
+  // ketika data sudah selesai ter-input maka tersimpan kesini!
   const [emailState, dispatchEmail] = useReducer(emailReducer, {
     value: "",
     isValid: null,
